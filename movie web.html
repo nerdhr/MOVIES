@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Add your custom CSS file -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Movie Posters</title>
+    <style>
+      /* Add custom styles here */
+        #search-input {
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            width: 200px; /* Adjust as needed */ 
+            margin-right: 10px; /* Add spacing between input and button */
+        }
+        #search-button {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #0074d9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #search-button:hover {
+            background-color: #0056b3;
+        }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #362e2e8; /* Change background color to your preference */
+        color: white;
+      }
+      #header-image {
+        width: 100%;
+        z-index: -1; /* Place the image behind other content */
+      }
+      #poster-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Center-align movie cards horizontally */
+      }
+      .movie-card {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.7),
+          rgba(0, 0, 0, 0.9)
+        ); /* Gradient background */
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 10px; /* Adjust spacing between cards */
+        text-align: center;
+        display: inline-block;
+        transition: transform 0.3s ease; /* Hover effect transition */
+      }
+      .movie-card:hover {
+        transform: scale(1.05); /* Enlarge card on hover */
+      }
+      .movie-card img {
+        max-width: 100%;
+        height: auto;
+      }
+      .movie-name {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 5px;
+        display: none; /* Hide movie names initially */
+      }
+      .movie-card:hover .movie-name {
+        display: block; /* Show movie names on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <input
+        type="text"
+        id="search-input"
+        placeholder="Search for movie posters"
+        oninput="searchPosters()"
+    />
+    <button onclick="searchPosters()">Search</button>
+    <!--<img
+      id="header-image"
+      src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa9539d07-d4d6-4644-8f87-d5edaaff7370_1920x1080.jpeg"
+      alt="Header Image"
+    /> -->
+    <div id="poster-cards">
+      <!-- Your movie poster cards go here -->
+      <!-- Example card -->
+      <div class="movie-card">
+        <script>
+          $(document).ready(function () {
+            $("#poster-cards").load("external.html", function () {
+              alert("Loaded external content!"); // Optional: Show an alert when content is loaded
+            });
+          });
+          function searchPosters() {
+            const searchTerm = document
+                .getElementById("search-input")
+                .value.toLowerCase();
+            const movieCards = document.querySelectorAll(".movie-card");
+
+            movieCards.forEach((card) => {
+                const movieName = card
+                    .querySelector(".movie-name")
+                    .textContent.toLowerCase();
+                if (movieName.includes(searchTerm)) {
+                    card.style.display = "block"; // Show matching cards
+                } else {
+                    card.style.display = "none"; // Hide non-matching cards
+                }
+            });
+        }
+        </script>
+      </div>
+      <!-- Add more movie cards as needed -->
+    </div>
+  </body>
+</html>
