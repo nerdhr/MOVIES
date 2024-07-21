@@ -112,7 +112,7 @@
                 const movieName = card
                     .querySelector(".movie-name")
                     .textContent.toLowerCase();
-                if (movieName.includes(searchTerm)) {
+                if (movieName.includes(searchTerm) || movieName.indexOf(searchTerm) !== -1) {
                     card.style.display = "block"; // Show matching cards
                 } else {
                     card.style.display = "none"; // Hide non-matching cards
